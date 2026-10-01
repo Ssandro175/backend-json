@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "5564bd9f-2eb5-4980-855a-f62eb6aeb888",
+    "nome": "Carlinhos Preto",
+    "email": "carlin@email.com",
+    "criadoEm": "2026-09-29T23:52:48.440Z"
+  },
+  {
+    "id": "8440917c-6082-4bba-b486-d5e8b9c5e43a",
+    "nome": "Pedrin",
+    "email": "pedrin@email.com",
+    "criadoEm": "2026-09-30T22:40:16.496Z"
+  },
+  {
+    "id": "fe32951f-9ff3-4806-8146-4c856b140290",
+    "nome": "Pedrin",
+    "email": "pedrin@email.com",
+    "criadoEm": "2026-09-30T23:38:27.842Z"
+  }
+]

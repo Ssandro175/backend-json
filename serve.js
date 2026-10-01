@@ -54,7 +54,7 @@ app.post("/users", async (req, res) => {
       return res.status(400).json({ error: "Nome e e-mail são obrigatórios" });
     }
 
-    const users = await readUser();
+    const users = await readUsers();
     const novoUsuario = {
       id: crypto.randomUUID(),
       nome,
@@ -67,6 +67,47 @@ app.post("/users", async (req, res) => {
     res.status(201).json(novoUsuario);
   } catch (err) {
     res.status(500).json({ error: "Erro ao salvar usuario" });
+  }
+});
+
+app.put("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { nome, email } = req.body;
+    const users = await readUsers();
+
+    const index = users.findIndex((u) => u.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    users[index] = {
+      ...users[index],
+      nome: nome ?? users[index].nome,
+      email: email ?? users[index].email,
+    };
+    await writeUsers(users);
+    res.json(users[index]);
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao atualizar usuário" });
+  }
+});
+
+app.delete("/users/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const users = await readUsers();
+
+    const index = users.findIndex((u) => u.id === id);
+    if (index === -1) {
+      return res.status(404).json({ error: "Usuário não encontrado" });
+    }
+
+    users.splice(index, 1);
+    await writeUsers(users);
+    res.json({ message: "Usuário removido com sucesso" });
+  } catch (err) {
+    res.status(500).json({ error: "Erro ao remover usuário" });
   }
 });
 
